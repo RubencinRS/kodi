@@ -3,6 +3,7 @@
     <extension point="xbmc.addon.repository" name="RubencinRS Repo">
         <info>https://raw.githubusercontent.com/RubencinRS/kodi/main/addons.xml</info>
         <checksum>https://raw.githubusercontent.com/RubencinRS/kodi/main/addons.xml.md5</checksum>
+        <datadir>https://raw.githubusercontent.com/RubencinRS/kodi/main/</datadir>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>RubencinRS Personal Repo</summary>
