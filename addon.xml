@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="repository.rubencinrs" name="[COLOR orchid]RUBENCINRS REPO[/COLOR]" provider-name="RubencinRS" version="0.0.1">
+    <extension point="xbmc.addon.repository" name="RubencinRS Repo">
+        <!-- <dir> -->
+            <info>https://github.com/alfa-addon/alfa-repo/raw/master/addons.xml</info>
+            <checksum>https://github.com/alfa-addon/alfa-repo/raw/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://github.com/alfa-addon/alfa-repo/raw/master</datadir>
+        <!-- </dir> -->
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>RubencinRS Personal Repo</summary>
+        <description>La casa del Chorlit supremo</description>
+        <platform>all</platform>
+        <!-- <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets> -->
+    </extension>
+</addon>
