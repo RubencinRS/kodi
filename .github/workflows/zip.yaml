@@ -1,0 +1,17 @@
+name: Crear un zip de la carpeta repository.rubencinrs
+
+on:
+	push:
+		branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Crear zip del repositorio
+      uses: thedoctor0/zip-release@0.7.5
+      with:
+        type: 'zip'
+        filename: 'repository.rubencinrs-0.0.1.zip'
+        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html'
