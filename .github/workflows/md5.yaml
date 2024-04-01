@@ -6,16 +6,16 @@ on:
       - main
 
 jobs:
-	build:
-		runs-on: ubuntu-latest
-		steps:
+  build:
+    runs-on: ubuntu-latest
+    steps:
     - uses: actions/setup-node@v3
 
     - uses: seepine/hash-files@v1
       id: get-hash
-      with: 
+      with:
         patterns: |
           **/addons.xml
 
     - name: Introduce el hash en el archivo .md5
-      run: echo ${{ steps.get-hash.outputs.hash }} >> addons.xml.md5
+    run: echo ${{ steps.get-hash.outputs.hash }} >> addons.xml.md5
