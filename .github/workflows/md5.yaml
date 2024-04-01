@@ -11,7 +11,8 @@ jobs:
     steps:
     - uses: actions/setup-node@v3
 
-    - uses: seepine/hash-files@v1
+    - name: Hacemos el hash
+    uses: seepine/hash-files@v1
       id: get-hash
       with:
         patterns: |
