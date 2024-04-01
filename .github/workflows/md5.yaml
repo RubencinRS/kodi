@@ -13,10 +13,10 @@ jobs:
 
     - name: Hacemos el hash
     uses: seepine/hash-files@v1
-      id: get-hash
-      with:
-        patterns: |
-          **/addons.xml
+    id: get-hash
+    with:
+      patterns: |
+        **/addons.xml
 
     - name: Introduce el hash en el archivo .md5
     run: echo ${{ steps.get-hash.outputs.hash }} >> addons.xml.md5
