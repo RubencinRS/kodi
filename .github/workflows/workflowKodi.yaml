@@ -9,8 +9,8 @@ jobs:
   jobZipMd5:
     name: Crear un zip de la carpeta repository.rubencinrs y crear un md5 del addons.xml
     runs-on: ubuntu-latest
-    #permissions:                # Job-level permissions configuration starts here
-    #  contents: write           # 'write' access to repository contents
+    permissions:                # Job-level permissions configuration starts here
+      contents: write           # 'write' access to repository contents
 
     steps:
     - name: Configura el node
@@ -19,12 +19,12 @@ jobs:
     - name: Descarga el repositorio de GitHub
       uses: actions/checkout@v4
 
-    #- name: Crear zip del repositorio de kodi
-     # uses: thedoctor0/zip-release@0.7.5
-      #with:
-       # type: 'zip'
-        #filename: 'repository.rubencinrs-0.0.1.zip'
-        #exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html'
+    - name: Crear zip del repositorio de kodi
+      uses: thedoctor0/zip-release@0.7.5
+      with:
+        type: 'zip'
+        filename: 'repository.rubencinrs-0.0.1.zip'
+        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html'
 
     - name: Hacemos el hash
       uses: seepine/hash-files@v1
