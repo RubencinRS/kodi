@@ -57,8 +57,8 @@ jobs:
 
     - name: Descomprimimos el artefacto
       run: |
-        unzip artifacto.zip
-        rm artifacto.zip
+        unzip artifacto
+        rm artifacto
 
     - name: Hacemos el commit
       run: |
