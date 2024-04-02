@@ -6,11 +6,16 @@ on:
       - main
 
 jobs:
-  jobZip:
-    name: Crear un zip de la carpeta repository.rubencinrs    
+  jobZipMd5:
+    name: Crear un zip de la carpeta repository.rubencinrs y crear un md5 del addons.xml
     runs-on: ubuntu-latest
+    permissions:                # Job-level permissions configuration starts here
+      contents: write           # 'write' access to repository contents
 
     steps:
+    - name: Configura el node
+      uses: actions/setup-node@v4   
+
     - name: Descarga el repositorio de GitHub
       uses: actions/checkout@v4
 
@@ -20,29 +25,6 @@ jobs:
         type: 'zip'
         filename: 'repository.rubencinrs-0.0.1.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html'
-
-    - name: Subir el workspace como artefacto
-      uses: actions/upload-artifact@v4
-      with:
-        name: artifacto
-        path: .
-        retention-days: 1
-
-  jobMd5:
-    name: Crear un md5 del addons.xml
-    needs: jobZip
-    runs-on: ubuntu-latest
-    permissions:                # Job-level permissions configuration starts here
-      contents: write           # 'write' access to repository contents
-
-    steps:
-    - name: Configura el node
-      uses: actions/setup-node@v4   
-
-    - name: Descargamos el artefacto del zip
-      uses: actions/download-artifact@v4
-      with:
-        name: artifacto
 
     - name: Hacemos el hash
       uses: seepine/hash-files@v1
