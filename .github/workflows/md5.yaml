@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@master
 
     - name: Hacemos el hash
-      uses: seepine/hash-files@master
+      uses: seepine/hash-files@main
       id: get-hash
       with:
         patterns: |
