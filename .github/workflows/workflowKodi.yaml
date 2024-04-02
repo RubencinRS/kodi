@@ -1,0 +1,67 @@
+name: Workflow que automatiza la creacion del md5 y del zip del repositorio de kodi
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  jobMd5:
+    name: Crear un md5 del addons.xml
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Configura el node
+      uses: actions/setup-node@master
+
+    - name: Descarga el repositorio de GitHub
+      uses: actions/checkout@master
+
+    - name: Hacemos el hash
+      uses: seepine/hash-files@main
+      id: get-hash
+      with:
+        patterns: |
+          **/addons.xml
+
+    - name: Introduce el hash en el archivo .md5
+      run: echo ${{ steps.get-hash.outputs.hash }} > addons.xml.md5
+
+    - name: Hacemos el commit
+      run: |
+        git config --local user.email "rubenca13@gmail.com"
+        git config --local user.name "RubencinRS"
+        git commit -am "Add hash"
+
+    - name: Subimos los cambios a GitHub
+      uses: ad-m/github-push-action@master
+      with:
+        branch: main
+
+jobs:
+  jobZip:
+    name: Crear un zip de la carpeta repository.rubencinrs
+    needs: jobMd5
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Descarga el repositorio de GitHub
+      uses: actions/checkout@v4
+
+    - name: Crear zip del repositorio de kodi
+      uses: thedoctor0/zip-release@0.7.5
+      with:
+        type: 'zip'
+        filename: 'repository.rubencinrs-0.0.1.zip'
+        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html'
+
+    - name: Hacemos el commit
+      run: |
+        git config --local user.email "rubenca13@gmail.com"
+        git config --local user.name "RubencinRS"
+        git commit -am "Add zip"
+
+    - name: Subimos los cambios a GitHub
+      uses: ad-m/github-push-action@master
+      with:
+        branch: main
