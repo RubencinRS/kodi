@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Configura el node
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
 
     - name: Descarga el repositorio de GitHub
       uses: actions/checkout@v4
@@ -23,7 +23,7 @@ jobs:
           **/addons.xml
 
     - name: Introduce el hash en el archivo .md5
-      run: echo ${{ steps.get-hash.outputs.hash }} >> addons.xml.md5
+      run: echo ${{ steps.get-hash.outputs.hash }} > addons.xml.md5
 
     - name: Hacemos el commit
       run: |
