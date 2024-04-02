@@ -1,9 +1,7 @@
 name: Crear un zip de la carpeta repository.rubencinrs
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
 
 jobs:
   build:
