@@ -38,8 +38,6 @@ jobs:
     name: Crear un zip de la carpeta repository.rubencinrs
     needs: jobMd5
     runs-on: ubuntu-latest
-    restore-keys: |
-        chorlit
 
     steps:
     - name: Descarga el repositorio de GitHub
