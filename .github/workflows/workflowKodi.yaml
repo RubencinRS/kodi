@@ -32,6 +32,8 @@ jobs:
     name: Crear un md5 del addons.xml
     needs: jobZip
     runs-on: ubuntu-latest
+    permissions:                # Job-level permissions configuration starts here
+      contents: write           # 'write' access to repository contents
 
     steps:
     - name: Configura el node
@@ -59,6 +61,6 @@ jobs:
         git commit -am "Add zip and md5"
 
     - name: Subimos los cambios a GitHub
-      uses: ad-m/github-push-action@v4
+      uses: ad-m/github-push-action@master
       with:
         branch: main
