@@ -6,8 +6,31 @@ on:
       - main
 
 jobs:
+  jobZip:
+    name: Crear un zip de la carpeta repository.rubencinrs    
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Descarga el repositorio de GitHub
+      uses: actions/checkout@master
+
+    - name: Crear zip del repositorio de kodi
+      uses: thedoctor0/zip-release@0.7.5
+      with:
+        type: 'zip'
+        filename: 'repository.rubencinrs-0.0.1.zip'
+        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html'
+
+    - name: Subir el zip como artefacto
+      uses: actions/upload-artifact@v4
+      with:
+        name: 'repository.rubencinrs-0.0.1.zip'
+        path: .
+        retention-days: 1  
+
   jobMd5:
     name: Crear un md5 del addons.xml
+    needs: jobZip
     runs-on: ubuntu-latest
 
     steps:
@@ -27,33 +50,10 @@ jobs:
     - name: Introduce el hash en el archivo .md5
       run: echo ${{ steps.get-hash.outputs.hash }} > addons.xml.md5
 
-    - name: Subir el md5 como artefacto
-      uses: actions/upload-artifact@v4
-      with:
-        name: addons.xml.md5
-        path: .
-        retention-days: 1
-
-  jobZip:
-    name: Crear un zip de la carpeta repository.rubencinrs
-    needs: jobMd5
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Descarga el repositorio de GitHub
-      uses: actions/checkout@master
-
-    - name: Crear zip del repositorio de kodi
-      uses: thedoctor0/zip-release@0.7.5
-      with:
-        type: 'zip'
-        filename: 'repository.rubencinrs-0.0.1.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html'
-
-    - name: Descargamos el artefacto del md5
+    - name: Descargamos el artefacto del zip
       uses: actions/download-artifact@v4
       with:
-        name: addons.xml.md5
+        name: 'repository.rubencinrs-0.0.1.zip'
 
     - name: Hacemos el commit
       run: |
