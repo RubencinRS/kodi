@@ -34,7 +34,9 @@ jobs:
           **/addons.xml
 
     - name: Introduce el hash en el archivo .md5
-      run: echo ${{ steps.get-hash.outputs.hash }} > addons.xml.md5
+      run: |
+        echo ${{ steps.get-hash.outputs.hash }} > addons.xml.md5
+        echo ${{ steps.get-hash.outputs.hash }}
 
     - name: Hacemos el commit
       run: |
