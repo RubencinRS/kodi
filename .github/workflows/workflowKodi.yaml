@@ -9,8 +9,8 @@ jobs:
   jobZipMd5:
     name: Crear un zip de la carpeta repository.rubencinrs y crear un md5 del addons.xml
     runs-on: ubuntu-latest
-    permissions:                # Job-level permissions configuration starts here
-      contents: write           # 'write' access to repository contents
+    #permissions:                # Job-level permissions configuration starts here
+    #  contents: write           # 'write' access to repository contents
 
     steps:
     - name: Configura el node
@@ -36,7 +36,6 @@ jobs:
     - name: Introduce el hash en el archivo .md5
       run: |
         echo "${{ steps.get-hash.outputs.hash }}" > addons.xml.md5
-        cat >> nombre_del_archivo.txt
 
     - name: Hacemos el commit
       run: |
