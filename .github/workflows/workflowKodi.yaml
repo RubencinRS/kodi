@@ -21,10 +21,10 @@ jobs:
         filename: 'repository.rubencinrs-0.0.1.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html'
 
-    - name: Subir el zip como artefacto
+    - name: Subir el workspace como artefacto
       uses: actions/upload-artifact@v4
       with:
-        name: 'repository.rubencinrs-0.0.1'
+        name: Build
         path: .
         retention-days: 1  
 
@@ -40,7 +40,7 @@ jobs:
     - name: Descargamos el artefacto del zip
       uses: actions/download-artifact@v4
       with:
-        name: 'repository.rubencinrs-0.0.1.zip'
+        name: Build
 
     - name: Hacemos el hash
       uses: seepine/hash-files@main
