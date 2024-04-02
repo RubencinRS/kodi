@@ -53,12 +53,7 @@ jobs:
     - name: Descargamos el artefacto del zip
       uses: actions/download-artifact@v4
       with:
-        name: artifacto
-
-    - name: Descomprimimos el artefacto
-      run: |
-        unzip artifacto
-        rm artifacto
+        name: artifacto   
 
     - name: Hacemos el commit
       run: |
