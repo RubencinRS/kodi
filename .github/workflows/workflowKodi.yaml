@@ -59,6 +59,6 @@ jobs:
       with:
         branch: main
 
-    - name: Limpiamos la cache
-        run: |
-          gh extension install actions/gh-actions-cache
+    #- name: Limpiamos la cache
+     #   run: |
+      #    gh extension install actions/gh-actions-cache
