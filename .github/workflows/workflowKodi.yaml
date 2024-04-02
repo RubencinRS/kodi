@@ -21,7 +21,7 @@ jobs:
         filename: 'repository.rubencinrs-0.0.1.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html'
 
-    - name: Subir el workspace como artefacto
+    - name: Subir el zip como artefacto
       uses: actions/upload-artifact@v4
       with:
         name: artifacto
