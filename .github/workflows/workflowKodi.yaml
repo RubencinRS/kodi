@@ -24,8 +24,8 @@ jobs:
     - name: Subir el workspace como artefacto
       uses: actions/upload-artifact@v4
       with:
-        name: Build
-        path: .
+        #name: 'repository.rubencinrs-0.0.1.zip'
+        path: 'repository.rubencinrs-0.0.1.zip'
         retention-days: 1  
 
   jobMd5:
@@ -37,10 +37,8 @@ jobs:
     - name: Configura el node
       uses: actions/setup-node@master
 
-    - name: Descargamos el artefacto del zip
-      uses: actions/download-artifact@v4
-      with:
-        name: Build
+    - name: Descarga el repositorio de GitHub
+      uses: actions/checkout@master   
 
     - name: Hacemos el hash
       uses: seepine/hash-files@main
@@ -51,6 +49,11 @@ jobs:
 
     - name: Introduce el hash en el archivo .md5
       run: echo ${{ steps.get-hash.outputs.hash }} > addons.xml.md5
+
+    - name: Descargamos el artefacto del zip
+      uses: actions/download-artifact@v4
+      with:
+        name: repository.rubencinrs-0.0.1.zip
 
     - name: Hacemos el commit
       run: |
