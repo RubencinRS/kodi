@@ -24,7 +24,7 @@ jobs:
     - name: Subir el workspace como artefacto
       uses: actions/upload-artifact@v4
       with:
-        #name: 'repository.rubencinrs-0.0.1.zip'
+        name: artifacto
         path: 'repository.rubencinrs-0.0.1.zip'
         retention-days: 1  
 
@@ -53,7 +53,12 @@ jobs:
     - name: Descargamos el artefacto del zip
       uses: actions/download-artifact@v4
       with:
-        name: repository.rubencinrs-0.0.1.zip
+        name: artifacto
+
+    - name: Descomprimimos el artefacto
+      run: |
+        unzip artifacto.zip
+        rm artifacto.zip
 
     - name: Hacemos el commit
       run: |
