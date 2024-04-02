@@ -9,20 +9,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Descarga el repositorio de GitHub
+      uses: actions/checkout@v4
 
-    - name: Crear zip del repositorio
+    - name: Crear zip del repositorio de kodi
       uses: thedoctor0/zip-release@0.7.5
       with:
         type: 'zip'
         filename: 'repository.rubencinrs-0.0.1.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html'
-    - name: Commit files
+
+    - name: Hacemos el commit
       run: |
         git config --local user.email "rubenca13@gmail.com"
         git config --local user.name "RubencinRS"
         git commit -am "Add zip"
-    - name: Push changes
+
+    - name: Subimos los cambios a GitHub
       uses: ad-m/github-push-action@master
       with:
         branch: main
