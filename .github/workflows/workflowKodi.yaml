@@ -22,7 +22,7 @@ jobs:
       with:
         type: 'zip'
         filename: 'repository.rubencinrs-0.0.1.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html *.md *.zip repository.a* repository.e* repository.L* repository.t*'
+        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html *.md *.zip '
 
     - name: Hacemos el hash
       uses: KEINOS/gh-action-hash-for-cache@main
