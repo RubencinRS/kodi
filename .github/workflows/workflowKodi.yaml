@@ -1,4 +1,4 @@
-name: Workflow que automatiza la creacion del md5 y del zip del repositorio de kodi
+name: Workflow que automatiza la creacion del zip del repositorio de kodi
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   jobZipMd5:
-    name: Crear un zip de la carpeta repository.rubencinrs y crear un md5 del addons.xml
+    name: Crear un zip de la carpeta repository.rubencinrs
     runs-on: ubuntu-latest
     permissions:                # Job-level permissions configuration starts here
       contents: write           # 'write' access to repository contents
@@ -22,18 +22,7 @@ jobs:
       with:
         type: 'zip'
         filename: 'repository.rubencinrs-0.0.1.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html *.md *.zip '
-
-    - name: Hacemos el hash
-      uses: KEINOS/gh-action-hash-for-cache@main
-      id: get-hash
-      with:
-        path: |
-          **/addons.xml
-
-    - name: Introduce el hash en el archivo .md5
-      run: |
-        echo "${{ steps.get-hash.outputs.hash }}" > ./addons.xml.md5
+        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html *.md *.zip '    
 
     - name: Hacemos el commit
       run: |
