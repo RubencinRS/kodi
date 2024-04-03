@@ -12,9 +12,7 @@ jobs:
     permissions:                # Job-level permissions configuration starts here
       contents: write           # 'write' access to repository contents
 
-    steps:
-    - name: Configura el node
-      uses: actions/setup-node@v4   
+    steps: 
 
     - name: Descarga el repositorio de GitHub
       uses: actions/checkout@v4
@@ -24,13 +22,13 @@ jobs:
       with:
         type: 'zip'
         filename: 'repository.rubencinrs-0.0.1.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html *.zip README.md'
+        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html *.md *.zip'
 
     - name: Hacemos el hash
-      uses: seepine/hash-files@v1
+      uses: KEINOS/gh-action-hash-for-cache@main
       id: get-hash
       with:
-        patterns: |
+        path: |
           **/addons.xml
 
     - name: Introduce el hash en el archivo .md5
