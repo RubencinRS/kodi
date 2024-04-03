@@ -24,7 +24,7 @@ jobs:
       with:
         type: 'zip'
         filename: 'repository.rubencinrs-0.0.1.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html'
+        exclusions: '*.git* /*node_modules/* .editorconfig addons.xml* index.html *.zip'
 
     - name: Hacemos el hash
       uses: seepine/hash-files@v1
