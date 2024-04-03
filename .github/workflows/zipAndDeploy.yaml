@@ -1,4 +1,4 @@
-name: Workflow que automatiza la creacion del zip del repositorio de kodi
+name: Workflow que automatiza la creacion del zip del repositorio de kodi y publica la web
 
 on:
   push:
@@ -20,11 +20,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  jobZipMd5:
-    name: Crear un zip de la carpeta repository.rubencinrs
+  jobZipHtml:
+    name: Crear un zip de la carpeta repository.rubencinrs y publica la web
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
-    permissions:                # Job-level permissions configuration starts here
-      contents: write           # 'write' access to repository contents
 
     steps: 
 
@@ -50,24 +53,13 @@ jobs:
       with:
         branch: main
 
-  # Single deploy job since we're just deploying
-  deploy:
-    needs: jobZipMd5
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
- 
+    - name: Setup Pages
+      uses: actions/configure-pages@v5
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        # Upload entire repository
+        path: '.'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
